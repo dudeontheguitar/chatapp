@@ -45,15 +45,18 @@ class UserSettingsViewModel @Inject constructor(
         })
     }
 
-    fun updateUser(username: String, avatarUrl: String){
+    fun updateUser(username: String?, avatarUrl: String?) {
         val uid = authRepository.currentUserId() ?: return
-        db.child("users").child(uid).updateChildren(
-            mapOf(
-                "username" to username,
-                "avatarUrl" to avatarUrl
-            )
-        )
+        val updates = mutableMapOf<String, Any>()
+
+        if (!username.isNullOrBlank()) updates["username"] = username
+        if (!avatarUrl.isNullOrBlank()) updates["avatarUrl"] = avatarUrl
+
+        if (updates.isNotEmpty()) {
+            db.child("users").child(uid).updateChildren(updates)
+        }
     }
+
 
     fun logout() = authRepository.logout()
 

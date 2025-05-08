@@ -59,7 +59,7 @@ fun ChatListScreen(
                             navController.navigate("chat/${chat.chatId}")
                         },
                     colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFF6C63FF)
+                        containerColor = Color(0xFFA8A3FF)
                     )
                 ) {
                     Row(

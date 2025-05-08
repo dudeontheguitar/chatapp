@@ -32,8 +32,8 @@ fun UserSettingsScreen(
     viewModel: UserSettingsViewModel = hiltViewModel()
 ) {
     val user by viewModel.user.collectAsState()
-    var username by remember { mutableStateOf(user?.username ?: "") }
-    var avatarUrl by remember { mutableStateOf(user?.avatarUrl ?: "") }
+    var username by remember(user) { mutableStateOf(user?.username ?: "") }
+    var avatarUrl by remember(user) { mutableStateOf(user?.avatarUrl ?: "") }
     val isUploading by viewModel.isUploading.collectAsState()
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -129,8 +129,10 @@ fun UserSettingsScreen(
             onClick = {
                 viewModel.logout()
                 navController.navigate("login") {
-                    popUpTo("chatlist") { inclusive = true }
+                    popUpTo(0) { inclusive = true }
+                    launchSingleTop = true
                 }
+
             },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
