@@ -1,9 +1,11 @@
 package com.example.chat.presentation.chat
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
@@ -48,19 +50,23 @@ fun ChatListScreen(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .padding(horizontal = 16.dp, vertical = 4.dp)
         ) {
             items(chatList) { chat: ChatPreview ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 4.dp)
+                        .border(
+                            width = 1.dp,
+                            color = Color.Black,
+                            shape = RoundedCornerShape(12.dp)
+                        )
                         .clickable {
                             navController.navigate("chat/${chat.chatId}")
                         },
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFFA8A3FF)
-                    )
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White)
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,

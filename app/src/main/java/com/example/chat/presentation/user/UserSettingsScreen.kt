@@ -38,7 +38,6 @@ fun UserSettingsScreen(
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
-    // Выбор изображения
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             coroutineScope.launch {
@@ -80,7 +79,6 @@ fun UserSettingsScreen(
             CircularProgressIndicator(modifier = Modifier.padding(bottom = 16.dp))
         }
 
-        // Сбросить аватарку
         Button(
             onClick = {
                 val defaultUrl = "https://api.dicebear.com/6.x/identicon/svg?seed=${user?.uid}"

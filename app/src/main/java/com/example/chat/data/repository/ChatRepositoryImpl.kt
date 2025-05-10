@@ -27,7 +27,6 @@ class ChatRepositoryImpl @Inject constructor(
             if (currentUserId in users) {
                 val otherId = users.firstOrNull { it != currentUserId } ?: continue
 
-                // Получаем имя другого пользователя
                 val userSnap = db.child("users").child(otherId).get().await()
                 val username = userSnap.child("username").getValue(String::class.java) ?: "Unknown"
                 val avatarUrl = userSnap.child("avatarUrl").getValue(String::class.java)

@@ -25,7 +25,6 @@ fun LoginScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    // Переход на экран чата после успешного входа
     LaunchedEffect(isSuccess) {
         if (isSuccess) {
             navController.navigate("chatlist") {

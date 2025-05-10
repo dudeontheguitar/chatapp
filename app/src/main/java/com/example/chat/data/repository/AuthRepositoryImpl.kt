@@ -23,7 +23,6 @@ class AuthRepositoryImpl (
                 )
                 database.child("users").child(uid).setValue(userMap).await()
 
-                // Создаём чаты со всеми остальными пользователями
                 createChatsWithAllUsers(uid)
 
                 true
@@ -53,9 +52,8 @@ class AuthRepositoryImpl (
         val usersSnapshot = database.child("users").get().await()
         for (userSnap in usersSnapshot.children) {
             val otherUserId = userSnap.key ?: continue
-            if (otherUserId == newUserId) continue // себя не добавляем
+            if (otherUserId == newUserId) continue
 
-            // Проверяем, есть ли уже чат между этими пользователями
             val chatSnapshot = database.child("chats").get().await()
             var chatExists = false
 
